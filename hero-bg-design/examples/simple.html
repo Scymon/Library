@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Hero BG Example</title>
+  <link rel="stylesheet" href="../src/styles/hero-bg-design.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <!-- Just add the class - that's it! -->
+  <div class="hero hero-bg-particle-networks">
+    <div>
+      <h1>Welcome</h1>
+      <p>Background animation with just one CSS class</p>
+    </div>
+  </div>
+
+  <!-- Load the library -->
+  <script type="module" src="../src/index.js"></script>
+</body>
+</html>

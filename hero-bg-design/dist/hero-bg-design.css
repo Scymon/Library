@@ -1,0 +1,101 @@
+/**
+ * Hero BG Design - Base Styles
+ *
+ * These classes prepare elements to receive animated backgrounds.
+ * The animations are applied via JavaScript canvas elements.
+ */
+
+/* Base class for all hero backgrounds */
+[class*="hero-bg-"] {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ensure content sits above the background */
+[class*="hero-bg-"] > *:not(canvas) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Optional: Full viewport hero sections */
+.hero-bg-fullscreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Optional: Container sizing options */
+.hero-bg-container-sm {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hero-bg-container-md {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-bg-container-lg {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Optional: Padding helpers */
+.hero-bg-padding-sm {
+  padding: 2rem;
+}
+
+.hero-bg-padding-md {
+  padding: 4rem;
+}
+
+.hero-bg-padding-lg {
+  padding: 6rem;
+}
+
+/* Dark overlay for better text readability (optional) */
+.hero-bg-overlay-dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.hero-bg-overlay-light::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 0;
+}
+
+/* Ensure text is readable over animations */
+.hero-bg-text-light {
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-bg-text-dark {
+  color: #000000;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+/* Performance optimization */
+[class*="hero-bg-"] canvas {
+  will-change: auto;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  [class*="hero-bg-"] canvas {
+    display: none;
+  }
+}
