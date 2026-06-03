@@ -36,7 +36,7 @@
 </head>
 <body>
   <!-- Just add the class - that's it! -->
-  <div class="hero hero-bg-particle-networks">
+  <div class="hero hero-bg-particle-networks" id="hero">
     <div>
       <h1>Welcome</h1>
       <p>Background animation with just one CSS class</p>
@@ -44,6 +44,20 @@
   </div>
 
   <!-- Load the library -->
-  <script type="module" src="../src/index.js"></script>
+  <script type="module">
+    import heroBGDesign from '../src/index.js';
+
+    // The library auto-initializes, but we can also manually verify
+    console.log('Hero BG Design loaded!');
+    console.log('Active instances:', heroBGDesign.getInstances().size);
+
+    // Wait a moment for auto-init, then check
+    setTimeout(() => {
+      if (heroBGDesign.getInstances().size === 0) {
+        console.warn('Auto-init may have failed, manually initializing...');
+        heroBGDesign.scanAndInitialize();
+      }
+    }, 500);
+  </script>
 </body>
 </html>

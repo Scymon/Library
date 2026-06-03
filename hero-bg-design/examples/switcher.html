@@ -262,7 +262,10 @@
 
   <script type="module">
     import heroBGDesign from '../src/index.js';
-    import { getAvailableAnimations } from '../src/AnimationRegistry.js';
+    import { getAvailableAnimations, getAnimation } from '../src/AnimationRegistry.js';
+
+    // Current animation instance
+    let currentAnimation = null;
 
     // Animation metadata
     const animationData = {
@@ -380,22 +383,42 @@
       select.appendChild(option);
     });
 
-    // Set initial value
+    // Set initial value and start first animation
     select.value = 'hero-bg-particle-networks';
+
+    // Initialize first animation
+    setTimeout(() => {
+      switchAnimation('hero-bg-particle-networks');
+    }, 100);
 
     // Switch animation function
     function switchAnimation(className) {
       const hero = document.getElementById('hero');
       const data = animationData[className] || { name: className, desc: 'Amazing animation effect' };
 
+      // Destroy old animation if it exists
+      if (currentAnimation) {
+        currentAnimation.destroy();
+        currentAnimation = null;
+      }
+
       // Remove all animation classes
       animations.forEach(cls => hero.classList.remove(cls));
 
-      // Destroy old animation
-      heroBGDesign.destroy(hero);
-
-      // Add new class
+      // Add new class (for styling)
       hero.classList.add(className);
+
+      // Get the animation constructor
+      const AnimationClass = getAnimation(className);
+
+      if (AnimationClass) {
+        // Create and start new animation
+        currentAnimation = new AnimationClass(hero);
+        currentAnimation.start();
+        console.log('✅ Started animation:', className);
+      } else {
+        console.error('❌ Animation not found:', className);
+      }
 
       // Update UI
       document.getElementById('current-animation').textContent = className;
