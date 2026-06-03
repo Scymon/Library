@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero BG Design - Examples</title>
+  <link rel="stylesheet" href="../src/styles/hero-bg-design.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .hero button {
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid white;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+
+    .hero button:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem;
+      z-index: 1000;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .animation-name {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      font-family: monospace;
+      margin-bottom: 1rem;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="#gooey">Gooey Metaballs</a></li>
+      <li><a href="#particles">Particle Networks</a></li>
+      <li><a href="#gradient">Gradient Fields</a></li>
+      <li><a href="#neon">Neon Waves</a></li>
+      <li><a href="#more">View All 100+</a></li>
+    </ul>
+  </nav>
+
+  <!-- Example 1: Gooey Metaballs -->
+  <section id="gooey" class="hero hero-bg-gooey-metaballs">
+    <div class="hero-content">
+      <div class="animation-name">hero-bg-gooey-metaballs</div>
+      <h1>Gooey Metaballs</h1>
+      <p>Merging liquid blobs with SVG filter blur for organic connections</p>
+      <button>Learn More</button>
+    </div>
+  </section>
+
+  <!-- Example 2: Particle Networks -->
+  <section id="particles" class="hero hero-bg-particle-networks">
+    <div class="hero-content">
+      <div class="animation-name">hero-bg-particle-networks</div>
+      <h1>Particle Networks</h1>
+      <p>Connected dots forming dynamic webs with proximity lines</p>
+      <button>Explore Network</button>
+    </div>
+  </section>
+
+  <!-- Example 3: Flowing Gradient Fields -->
+  <section id="gradient" class="hero hero-bg-flowing-gradient-fields">
+    <div class="hero-content">
+      <div class="animation-name">hero-bg-flowing-gradient-fields</div>
+      <h1>Flowing Gradient Fields</h1>
+      <p>Trigonometric color grids that shift and flow</p>
+      <button>Experience Flow</button>
+    </div>
+  </section>
+
+  <!-- Example 4: Neon Wave Pulses -->
+  <section id="neon" class="hero hero-bg-neon-wave-pulses">
+    <div class="hero-content">
+      <div class="animation-name">hero-bg-neon-wave-pulses</div>
+      <h1>Neon Wave Pulses</h1>
+      <p>Layered glowing sine waves with mesmerizing blur effects</p>
+      <button>Ride the Wave</button>
+    </div>
+  </section>
+
+  <!-- Example 5: Ribbon Trails (Interactive) -->
+  <section id="ribbon" class="hero hero-bg-ribbon-trails">
+    <div class="hero-content">
+      <div class="animation-name">hero-bg-ribbon-trails</div>
+      <h1>Ribbon Trails</h1>
+      <p>Move your mouse to create beautiful glowing trails</p>
+      <button>Try It Now</button>
+    </div>
+  </section>
+
+  <!-- Example 6: Aurora Gradients -->
+  <section class="hero hero-bg-aurora-gradients">
+    <div class="hero-content">
+      <div class="animation-name">hero-bg-aurora-gradients</div>
+      <h1>Aurora Gradients</h1>
+      <p>Soft, breathing noise-driven color shifts</p>
+      <button>Witness Aurora</button>
+    </div>
+  </section>
+
+  <!-- Example 7: Starfield Depth -->
+  <section class="hero hero-bg-starfield-depth">
+    <div class="hero-content">
+      <div class="animation-name">hero-bg-starfield-depth</div>
+      <h1>Starfield Depth</h1>
+      <p>3D moving stars with parallax effect</p>
+      <button>Enter Space</button>
+    </div>
+  </section>
+
+  <!-- Example 8: Matrix Rain -->
+  <section class="hero hero-bg-matrix-rain">
+    <div class="hero-content">
+      <div class="animation-name">hero-bg-matrix-rain</div>
+      <h1>Matrix Rain</h1>
+      <p>Falling code-like characters in the iconic Matrix style</p>
+      <button>Take the Red Pill</button>
+    </div>
+  </section>
+
+  <!-- Example 9: Customized Particle Network -->
+  <section class="hero hero-bg-particle-networks"
+           data-hero-bg-particle-count="150"
+           data-hero-bg-max-distance="200"
+           data-hero-bg-particle-color="#ff006e">
+    <div class="hero-content">
+      <div class="animation-name">hero-bg-particle-networks (customized)</div>
+      <h1>Customized Animation</h1>
+      <p>Using data attributes to customize particle count, distance, and color</p>
+      <button>See the Code</button>
+    </div>
+  </section>
+
+  <!-- Example 10: Neural Network -->
+  <section id="more" class="hero hero-bg-neural-network">
+    <div class="hero-content">
+      <div class="animation-name">hero-bg-neural-network</div>
+      <h1>100 Animations Total</h1>
+      <p>This library includes 100 unique background animations. Check the README for the complete list!</p>
+      <button>View Documentation</button>
+    </div>
+  </section>
+
+  <!-- Load the library -->
+  <script type="module" src="../src/index.js"></script>
+</body>
+</html>
