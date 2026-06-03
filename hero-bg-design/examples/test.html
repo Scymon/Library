@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Animation</title>
+  <style>
+    body {
+      margin: 0;
+      background: #1a1a1a;
+      font-family: monospace;
+      color: white;
+    }
+
+    #test-hero {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+    }
+
+    .debug {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+      border: 1px solid #4ECDC4;
+      font-size: 12px;
+      max-width: 400px;
+    }
+
+    .debug h3 {
+      color: #4ECDC4;
+      margin-top: 0;
+    }
+
+    .debug pre {
+      margin: 5px 0;
+      color: #0f0;
+    }
+
+    .error {
+      color: #f00;
+    }
+
+    .success {
+      color: #0f0;
+    }
+  </style>
+</head>
+<body>
+  <div id="test-hero">
+    <div class="content">
+      <h1>Testing Animation</h1>
+      <p>Check console and debug panel</p>
+    </div>
+  </div>
+
+  <div class="debug">
+    <h3>Debug Info</h3>
+    <div id="debug-output">Initializing...</div>
+  </div>
+
+  <script type="module">
+    function log(msg, isError = false) {
+      const output = document.getElementById('debug-output');
+      const className = isError ? 'error' : 'success';
+      output.innerHTML += `<pre class="${className}">${msg}</pre>`;
+      console.log(msg);
+    }
+
+    try {
+      log('1. Starting import...');
+
+      // Import the animation directly
+      const { ParticleNetworks } = await import('../src/animations/ParticleNetworks.js');
+      log('2. ✅ ParticleNetworks imported');
+
+      // Get the element
+      const hero = document.getElementById('test-hero');
+      log('3. ✅ Element found: ' + hero.id);
+
+      // Create animation instance
+      log('4. Creating animation...');
+      const animation = new ParticleNetworks(hero, {
+        particleCount: 100,
+        maxDistance: 150,
+        particleColor: '#4ECDC4'
+      });
+      log('5. ✅ Animation instance created');
+
+      // Start animation
+      animation.start();
+      log('6. ✅ Animation started!');
+
+      log('7. Canvas size: ' + animation.width + 'x' + animation.height);
+
+      // Check if canvas exists
+      const canvas = hero.querySelector('canvas');
+      if (canvas) {
+        log('8. ✅ Canvas element exists in DOM');
+        log('9. Canvas dimensions: ' + canvas.width + 'x' + canvas.height);
+      } else {
+        log('8. ❌ No canvas element found!', true);
+      }
+
+    } catch (error) {
+      log('❌ ERROR: ' + error.message, true);
+      console.error(error);
+    }
+  </script>
+</body>
+</html>
