@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hero BG Design - Animation Switcher</title>
+  <link rel="stylesheet" href="../src/styles/hero-bg-design.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .hero {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .controls {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 20px 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      min-width: 400px;
+    }
+
+    .controls h2 {
+      color: white;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .control-group {
+      margin-bottom: 15px;
+    }
+
+    .control-group label {
+      display: block;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    select:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #4ECDC4;
+      box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.2);
+    }
+
+    option {
+      background: #1a1a1a;
+      color: white;
+    }
+
+    .hero-content {
+      text-align: center;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+      padding: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      font-weight: 800;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    .hero-content .animation-name {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 1.1rem;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      animation: fadeIn 0.5s ease-out 0.2s backwards;
+    }
+
+    .hero-content p {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeIn 0.5s ease-out 0.4s backwards;
+    }
+
+    .info-panel {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 15px 20px;
+      border-radius: 10px;
+      color: white;
+      font-size: 0.9rem;
+      max-width: 300px;
+    }
+
+    .info-panel h3 {
+      margin-bottom: 10px;
+      font-size: 1rem;
+      color: #4ECDC4;
+    }
+
+    .info-panel ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .info-panel li {
+      padding: 5px 0;
+      opacity: 0.8;
+    }
+
+    .toggle-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      background: rgba(0, 0, 0, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+
+    .toggle-controls:hover {
+      background: rgba(0, 0, 0, 0.9);
+      transform: translateY(-2px);
+    }
+
+    .controls.hidden {
+      transform: translateX(-50%) translateY(-120%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .random-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border: none;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+
+    .random-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .controls {
+        min-width: 300px;
+        padding: 15px 20px;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .info-panel {
+        font-size: 0.8rem;
+        max-width: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-controls" onclick="toggleControls()">Toggle Controls</button>
+
+  <div class="controls">
+    <h2>🎨 Animation Switcher</h2>
+    <div class="control-group">
+      <label for="animation-select">Choose an animation:</label>
+      <select id="animation-select">
+        <!-- Options will be populated by JavaScript -->
+      </select>
+    </div>
+    <button class="random-btn" onclick="randomAnimation()">🎲 Random Animation</button>
+  </div>
+
+  <div id="hero" class="hero">
+    <div class="hero-content">
+      <div class="animation-name" id="current-animation">hero-bg-particle-networks</div>
+      <h1 id="animation-title">Particle Networks</h1>
+      <p id="animation-description">Connected dots forming dynamic webs with proximity lines</p>
+    </div>
+  </div>
+
+  <div class="info-panel">
+    <h3>💡 Tips</h3>
+    <ul>
+      <li>• Use dropdown to switch effects</li>
+      <li>• Some animations are interactive</li>
+      <li>• Try moving your mouse!</li>
+      <li>• Click for special effects</li>
+    </ul>
+  </div>
+
+  <script type="module">
+    import heroBGDesign from '../src/index.js';
+    import { getAvailableAnimations } from '../src/AnimationRegistry.js';
+
+    // Animation metadata
+    const animationData = {
+      'hero-bg-gooey-metaballs': { name: 'Gooey Metaballs', desc: 'Merging liquid blobs with SVG filter blur' },
+      'hero-bg-particle-networks': { name: 'Particle Networks', desc: 'Connected dots forming dynamic webs' },
+      'hero-bg-flowing-gradient-fields': { name: 'Flowing Gradient Fields', desc: 'Trigonometric color grids' },
+      'hero-bg-neon-wave-pulses': { name: 'Neon Wave Pulses', desc: 'Layered glowing sine waves' },
+      'hero-bg-ribbon-trails': { name: 'Ribbon Trails', desc: 'Mouse-following glowing paths (Move your mouse!)' },
+      'hero-bg-aurora-gradients': { name: 'Aurora Gradients', desc: 'Soft, breathing color shifts' },
+      'hero-bg-vortex-swirls': { name: 'Vortex Swirls', desc: 'Central pulling spirals of particles' },
+      'hero-bg-confetti-bursts': { name: 'Confetti Bursts', desc: 'Exploding colorful particles on trigger' },
+      'hero-bg-starfield-depth': { name: 'Starfield Depth', desc: '3D moving stars with parallax' },
+      'hero-bg-matrix-rain': { name: 'Matrix Rain', desc: 'Falling code-like characters' },
+      'hero-bg-fire-smoke': { name: 'Fire & Smoke', desc: 'Particle-based rising flames' },
+      'hero-bg-water-ripples': { name: 'Water Ripples', desc: 'Distorting waves from clicks (Click to create ripples!)' },
+      'hero-bg-bokeh-lights': { name: 'Bokeh Lights', desc: 'Blurry floating circles with depth' },
+      'hero-bg-fractal-trees': { name: 'Fractal Trees', desc: 'Growing branching patterns' },
+      'hero-bg-plasma-effects': { name: 'Plasma Effects', desc: 'Wavy colorful interference patterns' },
+      'hero-bg-glitch-distortion': { name: 'Glitch Distortion', desc: 'Random visual glitches' },
+      'hero-bg-pixelated-distortion': { name: 'Pixelated Distortion', desc: 'Mouse-warped grids (Move your mouse!)' },
+      'hero-bg-orbital-trails': { name: 'Orbital Trails', desc: 'Circling particles leaving paths' },
+      'hero-bg-lava-lamp-blobs': { name: 'Lava Lamp Blobs', desc: 'Slow-rising colored shapes' },
+      'hero-bg-snowfall-particles': { name: 'Snowfall', desc: 'Gentle falling flakes with wind' },
+      'hero-bg-rain-drops': { name: 'Rain Drops', desc: 'Streaking lines with splashes' },
+      'hero-bg-fireworks-explosion': { name: 'Fireworks Explosion', desc: 'Bursting trails and sparks' },
+      'hero-bg-floating-bubbles': { name: 'Floating Bubbles', desc: 'Rising transparent circles' },
+      'hero-bg-wormhole-tunnel': { name: 'Wormhole Tunnel', desc: '3D rotating grid illusion' },
+      'hero-bg-kaleidoscope-symmetry': { name: 'Kaleidoscope', desc: 'Mirrored rotating patterns' },
+      'hero-bg-perlin-noise-clouds': { name: 'Perlin Noise Clouds', desc: 'Drifting organic textures' },
+      'hero-bg-electric-arcs': { name: 'Electric Arcs', desc: 'Jumping lightning between points' },
+      'hero-bg-heartbeat-pulse': { name: 'Heartbeat Pulse', desc: 'Expanding rings from center' },
+      'hero-bg-vine-growth': { name: 'Vine Growth', desc: 'Extending branching lines' },
+      'hero-bg-crystal-growth': { name: 'Crystal Growth', desc: 'Expanding geometric facets' },
+      'hero-bg-sand-dunes': { name: 'Sand Dunes', desc: 'Shifting wavy lines' },
+      'hero-bg-ocean-waves': { name: 'Ocean Waves', desc: 'Multi-layer rolling crests' },
+      'hero-bg-galaxy-spiral': { name: 'Galaxy Spiral', desc: 'Rotating star clusters' },
+      'hero-bg-neural-network': { name: 'Neural Network', desc: 'Pulsing connected nodes' },
+      'hero-bg-circuit-board': { name: 'Circuit Board', desc: 'Glowing traces and chips' },
+      'hero-bg-hologram-flicker': { name: 'Hologram Flicker', desc: 'Scanline interference' },
+      'hero-bg-magnetic-fields': { name: 'Magnetic Fields', desc: 'Curved lines around poles' },
+      'hero-bg-butterfly-swarm': { name: 'Butterfly Swarm', desc: 'Flapping winged particles' },
+      'hero-bg-leaf-fall': { name: 'Leaf Fall', desc: 'Twirling descending shapes' },
+      'hero-bg-comet-tails': { name: 'Comet Tails', desc: 'Streaking with glowing trails' },
+      'hero-bg-fog-layers': { name: 'Fog Layers', desc: 'Parallax drifting mists' },
+      'hero-bg-gem-reflections': { name: 'Gem Reflections', desc: 'Faceted sparkling surfaces' },
+      'hero-bg-ink-bleed': { name: 'Ink Bleed', desc: 'Spreading fluid stains' },
+      'hero-bg-tessellation-patterns': { name: 'Tessellation Patterns', desc: 'Repeating shifting tiles' },
+      'hero-bg-mandelbrot-zoom': { name: 'Mandelbrot Zoom', desc: 'Infinite fractal dive' },
+      'hero-bg-bioluminescence': { name: 'Bioluminescence', desc: 'Pulsing underwater glows' },
+      'hero-bg-retro-grid': { name: 'Retro Grid', desc: 'Perspective vanishing lines' },
+      'hero-bg-sound-wave-visualizer': { name: 'Sound Wave Visualizer', desc: 'Reactive bars' },
+      'hero-bg-portal-rings': { name: 'Portal Rings', desc: 'Concentric expanding circles' },
+      'hero-bg-shard-explosion': { name: 'Shard Explosion', desc: 'Breaking glass fragments' },
+      'hero-bg-vine-entangle': { name: 'Vine Entangle', desc: 'Wrapping growing tendrils' },
+      'hero-bg-aurora-borealis': { name: 'Aurora Borealis', desc: 'Waving colored curtains' },
+      'hero-bg-ember-drift': { name: 'Ember Drift', desc: 'Rising glowing sparks' },
+      'hero-bg-bubble-cluster': { name: 'Bubble Cluster', desc: 'Clumping rising spheres' },
+      'hero-bg-lightning-storm': { name: 'Lightning Storm', desc: 'Random branching bolts' },
+      'hero-bg-flower-bloom': { name: 'Flower Bloom', desc: 'Opening petal layers' },
+      'hero-bg-clockwork-gears': { name: 'Clockwork Gears', desc: 'Rotating interlocking cogs' },
+      'hero-bg-dna-helix': { name: 'DNA Helix', desc: 'Twisting double strands' },
+      'hero-bg-solar-flares': { name: 'Solar Flares', desc: 'Erupting sun loops' },
+      'hero-bg-mosaic-reveal': { name: 'Mosaic Reveal', desc: 'Assembling tile images' },
+      'hero-bg-heat-haze': { name: 'Heat Haze', desc: 'Wavy distortion overlay' },
+      'hero-bg-feather-drift': { name: 'Feather Drift', desc: 'Gentle falling plumes' },
+      'hero-bg-rune-glow': { name: 'Rune Glow', desc: 'Pulsing ancient symbols' },
+      'hero-bg-pixel-rain': { name: 'Pixel Rain', desc: 'Blocky falling elements' },
+      'hero-bg-nebula-clouds': { name: 'Nebula Clouds', desc: 'Swirling space gases' },
+      'hero-bg-ripple-pond': { name: 'Ripple Pond', desc: 'Concentric water waves' },
+      'hero-bg-vine-lattice': { name: 'Vine Lattice', desc: 'Overgrowing grid' },
+      'hero-bg-spark-trails': { name: 'Spark Trails', desc: 'Mouse-drawn fading lines' },
+      'hero-bg-frost-patterns': { name: 'Frost Patterns', desc: 'Growing ice crystals' },
+      'hero-bg-echo-waves': { name: 'Echo Waves', desc: 'Fading repeating pulses' },
+      'hero-bg-swarm-intelligence': { name: 'Swarm Intelligence', desc: 'Flocking particle groups' },
+      'hero-bg-crystal-cave': { name: 'Crystal Cave', desc: 'Reflective stalactites' },
+      'hero-bg-wind-currents': { name: 'Wind Currents', desc: 'Flowing arrow paths' },
+      'hero-bg-luminous-jellyfish': { name: 'Luminous Jellyfish', desc: 'Pulsing tentacles' },
+      'hero-bg-geometric-morph': { name: 'Geometric Morph', desc: 'Shape transitions' },
+      'hero-bg-volcanic-ash': { name: 'Volcanic Ash', desc: 'Rising dark particles' },
+      'hero-bg-butterfly-migration': { name: 'Butterfly Migration', desc: 'Directional flocks' },
+      'hero-bg-holographic-grid': { name: 'Holographic Grid', desc: '3D wireframe floor' },
+      'hero-bg-ink-swirls': { name: 'Ink Swirls', desc: 'Mixing fluid colors' },
+      'hero-bg-starburst-rays': { name: 'Starburst Rays', desc: 'Expanding light beams' },
+      'hero-bg-cobweb-growth': { name: 'Cobweb Growth', desc: 'Spreading silk threads' },
+      'hero-bg-pulsar-beats': { name: 'Pulsar Beats', desc: 'Radial throbbing lights' },
+      'hero-bg-coral-reef': { name: 'Coral Reef', desc: 'Growing organic structures' },
+      'hero-bg-meteor-shower': { name: 'Meteor Shower', desc: 'Streaking falling rocks' },
+      'hero-bg-fog-roll': { name: 'Fog Roll', desc: 'Horizontal drifting layers' },
+      'hero-bg-rune-circle': { name: 'Rune Circle', desc: 'Rotating magic symbols' },
+      'hero-bg-vine-bloom': { name: 'Vine Bloom', desc: 'Flowering extensions' },
+      'hero-bg-echo-particles': { name: 'Echo Particles', desc: 'Fading duplicate trails' },
+      'hero-bg-fractal-flames': { name: 'Fractal Flames', desc: 'Burning pattern growth' },
+      'hero-bg-biolume-waves': { name: 'Biolume Waves', desc: 'Glowing ocean rolls' },
+      'hero-bg-shard-drift': { name: 'Shard Drift', desc: 'Floating glass pieces' },
+      'hero-bg-neural-pulse': { name: 'Neural Pulse', desc: 'Traveling node signals' },
+      'hero-bg-sandstorm': { name: 'Sandstorm', desc: 'Swirling grain clouds' },
+      'hero-bg-feather-storm': { name: 'Feather Storm', desc: 'Chaotic plume falls' },
+      'hero-bg-portal-vortex': { name: 'Portal Vortex', desc: 'Inward sucking rings' },
+      'hero-bg-crystal-pulse': { name: 'Crystal Pulse', desc: 'Facet light flashes' },
+      'hero-bg-ink-drop': { name: 'Ink Drop', desc: 'Expanding blot spreads' },
+      'hero-bg-lightning-web': { name: 'Lightning Web', desc: 'Connected bolt network' },
+      'hero-bg-aurora-rings': { name: 'Aurora Rings', desc: 'Concentric color bands' },
+      'hero-bg-galaxy-birth': { name: 'Galaxy Birth', desc: 'Forming star clusters' }
+    };
+
+    // Populate dropdown
+    const select = document.getElementById('animation-select');
+    const animations = getAvailableAnimations();
+
+    animations.forEach(className => {
+      const option = document.createElement('option');
+      option.value = className;
+      const data = animationData[className] || { name: className, desc: 'Amazing animation effect' };
+      option.textContent = `${data.name}`;
+      select.appendChild(option);
+    });
+
+    // Set initial value
+    select.value = 'hero-bg-particle-networks';
+
+    // Switch animation function
+    function switchAnimation(className) {
+      const hero = document.getElementById('hero');
+      const data = animationData[className] || { name: className, desc: 'Amazing animation effect' };
+
+      // Remove all animation classes
+      animations.forEach(cls => hero.classList.remove(cls));
+
+      // Destroy old animation
+      heroBGDesign.destroy(hero);
+
+      // Add new class
+      hero.classList.add(className);
+
+      // Update UI
+      document.getElementById('current-animation').textContent = className;
+      document.getElementById('animation-title').textContent = data.name;
+      document.getElementById('animation-description').textContent = data.desc;
+
+      // Trigger content animation
+      const content = document.querySelector('.hero-content');
+      content.style.animation = 'none';
+      setTimeout(() => {
+        content.style.animation = '';
+      }, 10);
+    }
+
+    // Event listener for dropdown
+    select.addEventListener('change', (e) => {
+      switchAnimation(e.target.value);
+    });
+
+    // Random animation function
+    window.randomAnimation = function() {
+      const randomIndex = Math.floor(Math.random() * animations.length);
+      const randomClass = animations[randomIndex];
+      select.value = randomClass;
+      switchAnimation(randomClass);
+    };
+
+    // Toggle controls
+    window.toggleControls = function() {
+      document.querySelector('.controls').classList.toggle('hidden');
+    };
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'r' || e.key === 'R') {
+        randomAnimation();
+      } else if (e.key === 'ArrowRight') {
+        const currentIndex = animations.indexOf(select.value);
+        const nextIndex = (currentIndex + 1) % animations.length;
+        select.value = animations[nextIndex];
+        switchAnimation(animations[nextIndex]);
+      } else if (e.key === 'ArrowLeft') {
+        const currentIndex = animations.indexOf(select.value);
+        const prevIndex = currentIndex === 0 ? animations.length - 1 : currentIndex - 1;
+        select.value = animations[prevIndex];
+        switchAnimation(animations[prevIndex]);
+      } else if (e.key === 'h' || e.key === 'H') {
+        toggleControls();
+      }
+    });
+
+    console.log('🎨 Animation Switcher Ready!');
+    console.log('💡 Press R for random animation');
+    console.log('💡 Use Arrow keys to navigate');
+    console.log('💡 Press H to hide/show controls');
+  </script>
+</body>
+</html>
